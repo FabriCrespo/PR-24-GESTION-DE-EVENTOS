@@ -1,5 +1,10 @@
 {
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^1.7.7"
+=======
+    "axios": "^1.7.7",
+    "react-router-dom": "^6.27.0"
+>>>>>>> 222c804 (front end inicio de sesion y registro de usuario)
   }
 }

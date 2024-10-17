@@ -14,8 +14,13 @@ app.use(express.json()); // Para procesar datos JSON en las solicitudes
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
+<<<<<<< HEAD
   password: 'root123C!',
   database: 'tuberculosis',
+=======
+  password: 'Random619@#',
+  database: 'sistema_eventos02',
+>>>>>>> 222c804 (front end inicio de sesion y registro de usuario)
 });
 
 // Conectar a la base de datos
@@ -24,7 +29,11 @@ db.connect((err) => {
     console.log('Error connecting to the database:', err);
     return;
   }
+<<<<<<< HEAD
   console.log('Connected to the MySQL database');
+=======
+  console.log('Connected to the MySQL database :D');
+>>>>>>> 222c804 (front end inicio de sesion y registro de usuario)
 });
 
 
