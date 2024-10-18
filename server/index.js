@@ -1,7 +1,12 @@
 // server/index.js
 const express = require('express');
-const mysql = require('mysql2');
 const cors = require('cors');  // Importar el módulo cors
+
+// Importar rutas
+const usuariosRoutes = require('./bd/routes/usuarios');
+const eventosRoutes = require('./bd/routes/eventos');
+const rolesRoutes = require('./bd/routes/roles');
+const ticketsRoutes = require('./bd/routes/tickets');
 
 const app = express();
 const PORT = 3001;
@@ -10,36 +15,18 @@ const PORT = 3001;
 app.use(cors()); // Permitir solicitudes desde otros dominios
 app.use(express.json()); // Para procesar datos JSON en las solicitudes
 
-// Configurar la conexióclientn a la base de datos MySQL
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root123C!',
-  database: 'tuberculosis',
+// Ruta para la raíz "/"
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando correctamente');
 });
 
-// Conectar a la base de datos
-db.connect((err) => {
-  if (err) {
-    console.log('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to the MySQL database');
-});
+// Usar las rutas importadas para manejar los CRUDs
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/eventos', eventosRoutes);
+app.use('/api/roles', rolesRoutes);
+app.use('/api/tickets', ticketsRoutes);
 
-
-// Rutas
-app.get('/api/redsalud', (req, res) => {
-  const query = 'SELECT * FROM tuberculosis.redsalud;'; // Asegúrate de que 'foods' sea el nombre correcto de la tabla
-  db.query(query, (err, result) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-    res.json(result); // Devuelve los datos en formato JSON
-  });
-});
-
-// Iniciar el servidor
+// Levantar el servidor
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Servidor ejecutándose en el puerto ${PORT} :D`);
 });
